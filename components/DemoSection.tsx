@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -41,7 +42,7 @@ const DemoSection: React.FC = () => {
           <p className="mt-6 text-lg text-gray-400">
             Just text <strong className="text-white">DEMO</strong> to <strong className="text-white">702-935-8925</strong> — our AI will respond instantly.
           </p>
-          <p className="mt-4 p-4 text-sm text-sky-300 bg-sky-900/30 border border-sky-800 rounded-lg">
+          <p className="mt-4 p-3 sm:p-4 text-sm text-sky-300 bg-sky-900/30 border border-sky-800 rounded-lg">
             <strong>Pro Tip:</strong> Your demo bot can learn your business. Just send your website or a short description, and it will instantly adapt.
           </p>
           <motion.a
@@ -62,7 +63,7 @@ const DemoSection: React.FC = () => {
           className="flex justify-center lg:justify-end"
         >
           {/* Phone Mockup */}
-          <div className="w-full max-w-sm h-[600px] bg-gray-900 border-8 border-gray-700 rounded-[40px] p-4 flex flex-col">
+          <div className="w-full max-w-sm h-[500px] sm:h-[600px] bg-gray-900 border-8 border-gray-700 rounded-[40px] p-4 flex flex-col">
             <div className="w-20 h-4 bg-gray-700 rounded-full mx-auto mb-2"></div>
             <div className="flex-1 bg-black rounded-3xl p-4 overflow-y-auto flex flex-col-reverse">
                 <div className="space-y-3">
@@ -76,7 +77,7 @@ const DemoSection: React.FC = () => {
                             transition={{ duration: 0.4 }}
                             className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                            <div className={`max-w-xs px-4 py-2 rounded-2xl ${
+                            <div className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
                                 msg.from === 'user' ? 'bg-blue-600 text-white rounded-br-lg' : 'bg-gray-700 text-gray-200 rounded-bl-lg'
                             }`}>
                                 {msg.text}

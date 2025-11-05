@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -21,7 +22,7 @@ const BenefitCard = ({ text, index }: { text: string; index: number }) => (
       boxShadow: "0px 0px 30px rgba(59, 130, 246, 0.3)",
       borderColor: "rgba(59, 130, 246, 0.5)"
     }}
-    className="p-8 h-full rounded-2xl bg-gray-900/50 border border-gray-800 cursor-pointer"
+    className="p-6 sm:p-8 h-full rounded-2xl bg-gray-900/50 border border-gray-800 cursor-pointer"
   >
     <h3 className="text-xl font-bold text-white">{text}</h3>
   </motion.div>

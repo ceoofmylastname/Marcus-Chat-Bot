@@ -42,7 +42,7 @@ const TestimonialsSection: React.FC = () => {
             Trusted by <span className="gradient-text">Businesses Like Yours</span>
         </motion.h2>
 
-        <div className="h-48 relative">
+        <div className="relative min-h-[14rem] sm:h-48">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={index}
@@ -50,7 +50,7 @@ const TestimonialsSection: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -30 }}
                     transition={{ duration: 0.5 }}
-                    className="absolute inset-0 p-8 bg-gray-900/50 border border-gray-800 rounded-2xl"
+                    className="absolute inset-0 p-6 sm:p-8 bg-gray-900/50 border border-gray-800 rounded-2xl flex flex-col justify-center"
                 >
                     <p className="text-lg sm:text-xl italic text-gray-300">"{testimonials[index].quote}"</p>
                     <p className="mt-6 font-bold text-white">{testimonials[index].name}</p>

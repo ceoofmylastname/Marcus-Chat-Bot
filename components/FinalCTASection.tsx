@@ -13,7 +13,7 @@ const FinalCTASection: React.FC = () => {
         viewport={{ once: true }}
         className="max-w-4xl mx-auto z-10 relative"
       >
-        <h2 className="text-4xl sm:text-6xl font-black tracking-tighter leading-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight">
           Your AI Assistant Is <span className="gradient-text">Ready to Work.</span> Are You?
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-400">

@@ -1,36 +1,71 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
 import { BrainIcon, CalendarIcon, CrmIcon, MemoryIcon } from './icons';
+
+const AnimatedCounter = ({ to }: { to: number }) => {
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [displayValue, setDisplayValue] = React.useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, to, {
+        duration: 1.5,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          setDisplayValue(Math.round(latest));
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, to]);
+
+  return <span ref={ref}>{displayValue}</span>;
+};
 
 const BarChart = () => {
   const bars = [
-    { label: 'Response Accuracy', value: 92, color: 'bg-blue-500' },
-    { label: 'Conversion', value: 78, color: 'bg-purple-500' },
-    { label: 'Engagement', value: 85, color: 'bg-sky-500' },
+    { label: 'Response Accuracy', value: 92, gradient: 'from-blue-500 to-blue-400' },
+    { label: 'Conversion', value: 78, gradient: 'from-purple-500 to-purple-400' },
+    { label: 'Engagement', value: 85, gradient: 'from-cyan-500 to-cyan-400' },
   ];
+
   return (
-    <div className="w-full mt-8 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-      <h4 className="text-lg font-semibold text-center mb-4 text-white">Increased Performance</h4>
-      <div className="flex justify-around items-end h-40 gap-4">
+    <div className="w-full mt-12 p-6 bg-slate-900/70 rounded-xl border border-slate-700 backdrop-blur-sm">
+      <h4 className="text-lg font-bold text-center mb-8 text-white">Increased Performance</h4>
+      
+      <div className="flex justify-around items-start text-center gap-x-4 md:gap-x-8">
         {bars.map((bar, i) => (
-          <div key={bar.label} className="flex flex-col items-center flex-1">
-            <motion.div
-              className={`w-full rounded-t-md ${bar.color}`}
-              initial={{ height: 0 }}
-              whileInView={{ height: `${bar.value}%` }}
-              transition={{ duration: 1, delay: i * 0.2, ease: 'easeOut' }}
-              viewport={{ once: true }}
-            >
-              <span className="text-white text-sm font-bold relative -top-6">{bar.value}%</span>
-            </motion.div>
-            <p className="text-xs text-center mt-2 text-gray-400">{bar.label}</p>
+          <div key={bar.label} className="w-1/3 flex flex-col items-center">
+            
+            {/* Bar Container - This has a fixed height, which is crucial */}
+            <div className="w-full h-40 bg-gray-800/50 rounded-t-md overflow-hidden flex flex-col justify-end">
+              <motion.div
+                className={`w-full bg-gradient-to-t ${bar.gradient}`}
+                initial={{ height: 0 }}
+                whileInView={{ height: `${bar.value}%` }}
+                transition={{ duration: 1.5, delay: i * 0.1, type: "spring", stiffness: 50, damping: 15 }}
+                viewport={{ once: true }}
+              />
+            </div>
+
+             {/* Percentage Counter */}
+            <p className="text-white font-bold text-xl mt-3">
+              <AnimatedCounter to={bar.value} />%
+            </p>
+            
+            {/* Label */}
+            <p className="text-sm text-gray-400 mt-1" aria-label={`${bar.label}: ${bar.value} percent`}>
+              {bar.label}
+            </p>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
 
 const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
   <div className="flex items-start gap-4">
@@ -67,7 +102,7 @@ const WhyDifferentSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
-            className="p-8 border border-red-500/30 bg-gray-900/30 rounded-2xl relative"
+            className="p-6 md:p-8 border border-red-500/30 bg-gray-900/30 rounded-2xl relative"
           >
             <div className="absolute top-4 right-4 px-3 py-1 text-sm font-semibold text-red-400 bg-red-900/50 rounded-full">THEN</div>
             <h3 className="text-2xl font-bold text-red-400 mb-4">Traditional Bots</h3>
@@ -85,7 +120,7 @@ const WhyDifferentSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
-            className="p-8 border border-blue-500/30 bg-gray-900/30 rounded-2xl relative"
+            className="p-6 md:p-8 border border-blue-500/30 bg-gray-900/30 rounded-2xl relative"
           >
             <div className="absolute top-4 right-4 px-3 py-1 text-sm font-semibold text-blue-300 bg-blue-900/50 rounded-full">NOW</div>
             <h3 className="text-2xl font-bold text-blue-400 mb-4">AI-Powered Assistants</h3>
